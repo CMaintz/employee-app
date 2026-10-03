@@ -80,6 +80,11 @@ namespace EmployeeWPF
             try
             {
                 tempEmployee = empBll.getEmployee(int.Parse(id));
+                if (tempEmployee == null)
+                {
+                    txtBlkEmployeeDetails.Text = $"No employee with ID {id}";
+                    return;
+                }
                 txtBlkEmployeeDetails.Text = $"Name: {tempEmployee.Name} (ID: {tempEmployee.EmployeeId})" +
                     $"\nCompany: {compBll.getCompany(tempEmployee.CompanyId).Name} (ID: {tempEmployee.CompanyId})" +
                     $"\nYears employed: {tempEmployee.YearsEmployed}";
@@ -106,6 +111,12 @@ namespace EmployeeWPF
                 if (parsedInput > 0)
                 {
                     DTO.Model.Company tempCompany = compBll.getCompany(parsedInput);
+                    if (tempCompany == null)
+                    {
+                        txtBlkCompanyDetails.Text = $"No company with ID {parsedInput}";
+                        CompanyEmployees = new ObservableCollection<Employee>();
+                        return;
+                    }
 
                     txtBlkCompanyDetails.Text = "Company Details\n" + tempCompany.DisplayDetails();
 

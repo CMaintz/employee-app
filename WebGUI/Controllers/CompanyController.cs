@@ -18,6 +18,10 @@ namespace WebGUI.Controllers
         {
             CompanyBLL companyBLL = new CompanyBLL();
             Company model = companyBLL.getCompany(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
             return View("Company", model);
         }
         public ActionResult EnterCompany()

@@ -12,6 +12,7 @@ namespace EmployeeDataAccess.Mappers
     {
         public static Model.Company Map(DTO.Model.Company company)
         {
+            if (company == null) return null;
             return new Model.Company
             {
                 CompanyId = company.CompanyId,
@@ -22,6 +23,7 @@ namespace EmployeeDataAccess.Mappers
 
         public static DTO.Model.Company Map(Model.Company company)
         {
+            if (company == null) return null;
             return new DTO.Model.Company
             {
                 CompanyId = company.CompanyId,

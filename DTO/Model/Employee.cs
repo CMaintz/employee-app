@@ -45,7 +45,7 @@ namespace DTO.Model
         public int CompanyId { get; set; }
 
         public string DisplayDetails => $"Name: {Name} (ID: {EmployeeId})" +
-                    $"\nCompany ID: {CompanyId})" +
+                    $"\nCompany ID: {CompanyId}" +
                     $"\nYears employed: {YearsEmployed}";
 
         public override string ToString()

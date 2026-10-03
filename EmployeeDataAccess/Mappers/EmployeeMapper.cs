@@ -12,10 +12,12 @@ namespace EmployeeDataAccess.Mappers
     {
         public static DTO.Model.Employee Map(Model.Employee employee)
         {
+            if (employee == null) return null;
             return new DTO.Model.Employee(employee.EmployeeId, employee.Name, employee.YearsEmployed, employee.CompanyId);
         }
         public static Model.Employee Map(DTO.Model.Employee employee)
         {
+            if (employee == null) return null;
             return new Model.Employee(employee.EmployeeId, employee.Name, employee.YearsEmployed, employee.CompanyId);
         }
 

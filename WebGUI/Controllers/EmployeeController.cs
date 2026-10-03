@@ -15,6 +15,10 @@ namespace WebGUI.Controllers
         {
             EmployeeBLL employeeBLL = new EmployeeBLL();
             Employee model = employeeBLL.getEmployee(id);
+            if (model == null)
+            {
+                return HttpNotFound();
+            }
             return View("Employee", model);
         }
         public ActionResult EnterEmployee()
