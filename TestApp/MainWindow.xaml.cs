@@ -1,6 +1,4 @@
-﻿using BLL.EmployeeBLL;
-using DTO.Model;
-using EmployeeDataAccess.Model;
+﻿using DTO.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +33,7 @@ namespace TestApp
             HttpClient client = new HttpClient();
 
             client.DefaultRequestHeaders.Accept.Clear();
-            Task<string> task = client.GetStringAsync("https://localhost:44367/api/employeeapi/1");
+            Task<string> task = client.GetStringAsync("https://localhost:44367/api/employeeapi/getemployee/1");
             
             String msg = task.Result;
 
@@ -52,9 +50,10 @@ namespace TestApp
             DTO.Model.Employee emp = new DTO.Model.Employee();
             emp.Name = "Patrick";
             emp.YearsEmployed = 37;
+            emp.CompanyId = 1;
             StringContent content = new StringContent(JsonSerializer.Serialize(emp),Encoding.UTF8, "application/json");
             //Eller brug den nye JsonContent
-            HttpResponseMessage result = client.PostAsync("https://localhost:44367/api/employeeapi/", content).Result;
+            HttpResponseMessage result = client.PostAsync("https://localhost:44367/api/employeeapi/addemployee", content).Result;
             Resultlabel.Content = result.StatusCode.ToString();
         }
     }

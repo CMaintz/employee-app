@@ -17,7 +17,12 @@ namespace WebAPI.Controllers
         public Employee GetEmployee(int id)
         {
             EmployeeBLL bll = new EmployeeBLL();
-            return bll.getEmployee(id);
+            Employee employee = bll.getEmployee(id);
+            if (employee == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return employee;
         }
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]

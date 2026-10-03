@@ -26,7 +26,8 @@ namespace EmployeeDataAccess.Repositories
         {
             using (EmployeeContext context = new EmployeeContext())
             {
-                return (List<DTO.Model.Employee>)CompanyMapper.Map(context.Companies.Find(id)).Employees;
+                DTO.Model.Company company = CompanyMapper.Map(context.Companies.Find(id));
+                return company == null ? new List<DTO.Model.Employee>() : company.Employees.ToList();
             }
         }
 

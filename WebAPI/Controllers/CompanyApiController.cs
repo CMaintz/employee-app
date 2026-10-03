@@ -17,7 +17,12 @@ namespace WebAPI.Controllers
         public Company GetCompany(int id)
         {
             CompanyBLL bll = new CompanyBLL();
-            return bll.getCompany(id);
+            Company company = bll.getCompany(id);
+            if (company == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return company;
         }
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]

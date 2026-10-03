@@ -39,9 +39,9 @@ The parts I'd point at are the repository pattern and the mapping between EF ent
 
 - WebGUI can look up a company or employee by id, create new ones, and the home page lists all of both.
 - The WPF client is lookup-only: get an employee or a company by id, and see a company's employees.
-- The Web API exposes get-by-id and create for both.
+- The Web API exposes get-by-id and create for both. Routes include the action, e.g. `GET api/employeeapi/getemployee/1` and `POST api/employeeapi/addemployee`. An unknown id gives a 404.
 - Editing and deleting aren't implemented. `CompanyBLL.editCompany` / `deleteCompany` and `EmployeeBLL.editEmployee` are empty `TODO` stubs, there's no employee delete at all, and `addEmployeeToCompany` exists in the BLL but nothing in the UI calls it.
-- `TestApp` doesn't compile as-is (it has a stale `using BLL.EmployeeBLL;`), and it calls a hard-coded `https://localhost:44367`.
+- `TestApp` calls a hard-coded `https://localhost:44367` (WebAPI's IIS Express port), so WebAPI has to be running from Visual Studio first.
 - There are no automated tests.
 
 ## Tech stack
@@ -57,7 +57,7 @@ The parts I'd point at are the repository pattern and the mapping between EF ent
 This needs Windows, Visual Studio (or Rider) and a local SQL Server Express instance.
 
 1. Open `EmployeeApp.sln`.
-2. Each runnable project has its own `Employees` connection string (`Web.config` for WebGUI and WebAPI, `App.config` for the WPF apps). Some are hard-coded to a specific machine's instance name, so change `Data Source` to your own (e.g. `localhost\SQLEXPRESS`). The database is `Employees18`, and EF creates and seeds it on first use.
+2. Each runnable project has its own `Employees` connection string (`Web.config` for WebGUI and WebAPI, `App.config` for the WPF apps). They all point at `localhost\SQLEXPRESS`, so change `Data Source` if your instance is named differently. The database is `Employees18`, and EF creates and seeds it on first use.
 3. Run `WebGUI` or `EmployeeWPF` on its own. Neither needs the Web API running. Start `WebAPI` only if you want to hit the REST endpoints.
 
 Employees need `YearsEmployed` between 1 and 45 (validated on the DTO).
